@@ -12,13 +12,13 @@
       <!-- 连接列表 -->
       <el-drawer
         :before-close="beforeClosedrawer"
-        title="数据库"
+        title="Database"
         size="380"
         :visible.sync="drawer"
         direction="ltr">
         <div v-loading="loadingLinks">
           <el-row>
-            <el-button class="linkBtn" @click="addLinkDialog = true" size="small" type="primary" plain>新建连接</el-button>
+            <el-button class="linkBtn" @click="addLinkDialog = true" size="small" type="primary" plain>New Connection</el-button>
           </el-row>   
           <el-menu class="menu"  @open="freshDB" :unique-opened="true">
             <el-submenu :index="String(index)" :key="index" v-for="(link, index) in links">
@@ -42,9 +42,9 @@
         </div>
         
       </el-drawer>
-      <!-- 新建连接的弹窗 -->
+      <!-- New Connection的弹窗 -->
 
-      <el-dialog :close-on-click-modal="false" :before-close="cancelAddLink" :visible.sync="addLinkDialog" title="新建连接">
+      <el-dialog :close-on-click-modal="false" :before-close="cancelAddLink" :visible.sync="addLinkDialog" title="New Connection">
         <el-form :model="linkForm"  :ref="linkForm" class="linkformstyle" label-width="80px">
           <el-form-item label="名称" prop="name">
             <el-input v-model="linkForm.name"></el-input>
@@ -63,12 +63,12 @@
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
-          <el-button @click="cancelAddLink" size="medium">取 消</el-button>
-          <el-button type="primary" @click="confirmAddLink" size="medium">确 定</el-button>
+          <el-button @click="cancelAddLink" size="medium">Cancel</el-button>
+          <el-button type="primary" @click="confirmAddLink" size="medium">Confirm</el-button>
         </div>
       </el-dialog>
-      <!-- 添加数据库的弹窗 -->
-      <el-dialog :visible.sync="addDBDialog" title="添加数据库">
+      <!-- Add Database的弹窗 -->
+      <el-dialog :visible.sync="addDBDialog" title="Add Database">
         <el-form class="linkformstyle" label-width="80px" size="small">
           <el-form-item label="名称" :rules="[
           { required: true, message: '名称不能为空'}
@@ -83,7 +83,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="replica" label-width="80px">
-            <el-select v-model="addDBreplica" placeholder="数据库副本数">
+            <el-select v-model="addDBreplica" placeholder="Database副本数">
               <el-option label="1" value="1"></el-option>
               <el-option label="2" value="2"></el-option>
               <el-option label="3" value="3"></el-option>
@@ -111,15 +111,15 @@
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
-          <el-button @click="addDBDialog = false" size="medium">取 消</el-button>
-          <el-button type="primary" @click="postaddDB" size="medium">确 定</el-button>
+          <el-button @click="addDBDialog = false" size="medium">Cancel</el-button>
+          <el-button type="primary" @click="postaddDB" size="medium">Confirm</el-button>
         </div>
       </el-dialog>
       
       <el-container class="main">
         <el-container class="mainContent">
           <el-tabs v-model="activeTab" type="border-card" class="mainTab"  @tab-click="handleSwichTab">
-            <el-tab-pane label="超级表" class="tablePage" name="1">
+            <el-tab-pane label="Super Table" class="tablePage" name="1">
               <el-container class="tableWrapper">
                 <el-aside class="mainAside" width="200px">
                   <div v-loading="loadingSurperList">
@@ -131,10 +131,10 @@
                     :data="surperTables"
                     style="width: 100%">
                     <el-table-column
-                      label="超级表名"
+                      label="Super Table name"
                       width="180">
                       <template slot="header" slot-scope="scope">   
-                        <span>超级表名</span>
+                        <span>Super Table name</span>
                         <div class="iconWrapper">
                           <div class="iconWrapper_" @click.stop="SuperTdialog=true">
                             <img class="icon1" v-if="searchIcon" @mouseenter="searchIcon = false" src="./img/search_.png">
@@ -158,7 +158,7 @@
                     </el-table-column>
                     </el-table>
                     <el-dialog
-                      title="搜索超级表"
+                      title="Search Super Table"
                       :visible.sync="SuperTdialog"
                       width="30%"
                       :before-close="closeSuperTdialog">
@@ -167,8 +167,8 @@
                         <i slot="prefix" class="el-input__icon el-icon-search"></i>
                       </el-input>
                       <span slot="footer" class="dialog-footer">
-                        <el-button size="small" @click="closeSuperTdialog">取 消</el-button>
-                        <el-button size="small" type="primary" @click="searchSurperTList">确 定</el-button>
+                        <el-button size="small" @click="closeSuperTdialog">Cancel</el-button>
+                        <el-button size="small" type="primary" @click="searchSurperTList">Confirm</el-button>
                       </span>
                     </el-dialog>
                   </div>
@@ -176,15 +176,15 @@
                 <el-main>
                   <div v-loading="loadingSurperTable">
                     <!-- 超级表筛选 -->
-                    <el-dialog :close-on-click-modal="false" :before-close="concelSurperTableFilter" title="筛选条件" :visible.sync="surperTableFilterDialog">
+                    <el-dialog :close-on-click-modal="false" :before-close="concelSurperTableFilter" title="filter" :visible.sync="surperTableFilterDialog">
                       <el-form  :model="surperTableFilter" label-width="80px">
-                          <el-form-item label="数据项" >
+                          <el-form-item label="Data items" >
                             <el-checkbox-group 
                               v-model="surperTableFilter.fields">
                               <el-row class="btnGroup">
                                 <el-button-group>
-                                  <el-button size="mini" @click="STChooseAll">全选</el-button>
-                                  <el-button size="mini" @click="STChooseReverse">反选</el-button>
+                                  <el-button size="mini" @click="STChooseAll">Select All</el-button>
+                                  <el-button size="mini" @click="STChooseReverse">Revert</el-button>
                                 </el-button-group>
                               </el-row>
                               <el-row class="checkboxGroup">
@@ -194,7 +194,7 @@
                               </el-row>
                             </el-checkbox-group>
                           </el-form-item>
-                          <el-form-item label="每页数目">
+                          <el-form-item label="Next">
                             <el-radio-group v-model="eachPageSurperTable">
                               <el-row class="checkboxGroup2">
                                 <el-radio :label="10">10</el-radio>
@@ -209,21 +209,21 @@
                             active-value="ASC"
                             inactive-value="DESC"
                             active-text="时间正序"
-                            inactive-text="时间倒序">
+                            inactive-text="Previous">
                           </el-switch>
 
                         </el-form>  
                         <span slot="footer" class="dialog-footer">
-                          <el-button @click="concelSurperTableFilter" size="small">取消</el-button>
-                          <el-button @click="postSurperTableFilter" size="small">设置</el-button>
+                          <el-button @click="concelSurperTableFilter" size="small">Cancel</el-button>
+                          <el-button @click="postSurperTableFilter" size="small">Confirm</el-button>
                         </span>
                     </el-dialog>
                     <!-- 超级表数据 -->
                     <el-row class="surperTSearchRow">
-                      <el-col :span="3" class="dataPackerLabel">时间范围: </el-col>
+                      <el-col :span="3" class="dataPackerLabel">Time Limit: </el-col>
                       <el-col :span="13">
                         <!-- <el-form  :model="surperTableFilter" label-width="80px"> -->
-                          <!-- <el-form-item label="时间范围" > -->
+                          <!-- <el-form-item label="Time Limit" > -->
                             <div class="datePickerWrapper">
                               <el-date-picker
                                 @change="selectSurperData(false,true)"
@@ -232,9 +232,9 @@
                                 v-model="surperTableFilter.surperDateRange"
                                 value-format="yyyy-MM-dd HH:mm:ss"
                                 type="datetimerange"
-                                range-separator="至"
-                                start-placeholder="开始日期"
-                                end-placeholder="结束日期"
+                                range-separator="To"
+                                start-placeholder="Start"
+                                end-placeholder="End"
                                 align="right">
                               </el-date-picker>
                             </div>
@@ -249,7 +249,7 @@
                         </el-input> -->
                       </el-col>
                       <el-col :span="4" class="freshDataBtn">
-                        <el-button @click="openSurperTableFilterD" size="small" style="width: 100%" icon="el-icon-setting">筛选条件</el-button>
+                        <el-button @click="openSurperTableFilterD" size="small" style="width: 100%" icon="el-icon-setting">filter</el-button>
                       </el-col>
                       <el-col :span="4" class="freshDataBtn">
                         <el-button @click="selectSurperData(false, false)" size="small" style="width: 100%" icon="el-icon-refresh">数据刷新</el-button>
@@ -292,7 +292,7 @@
                 </el-main>
               </el-container>
             </el-tab-pane>
-            <el-tab-pane label="表" class="tablePage" name="2">
+            <el-tab-pane label="Table" class="tablePage" name="2">
               <el-container class="tableWrapper">
                 <el-aside class="mainAside" width="200px">
                   <div v-loading="loadingTableList">
@@ -340,23 +340,23 @@
                         <i slot="prefix" class="el-input__icon el-icon-search"></i>
                       </el-input>
                       <span slot="footer" class="dialog-footer">
-                        <el-button size="small" @click="closeTdialog">取 消</el-button>
-                        <el-button size="small" type="primary" @click="searchTList">确 定</el-button>
+                        <el-button size="small" @click="closeTdialog">Cancel</el-button>
+                        <el-button size="small" type="primary" @click="searchTList">Confirm</el-button>
                       </span>
                     </el-dialog>
                   </div>
                 </el-aside>
                 <el-main>      
                   <div v-loading="loadingTable">
-                    <el-dialog :close-on-click-modal="false" :before-close="concelTableFilter"	title="筛选条件" :visible.sync="tableFilterDialog">
+                    <el-dialog :close-on-click-modal="false" :before-close="concelTableFilter"	title="filter" :visible.sync="tableFilterDialog">
                       <el-form  :model="tableFilter" label-width="80px">
-                          <el-form-item label="数据项" >
+                          <el-form-item label="Data items" >
                             <el-checkbox-group 
                               v-model="tableFilter.fields">
                               <el-row class="btnGroup">
                                 <el-button-group>
-                                  <el-button size="mini" @click="TChooseAll">全选</el-button>
-                                  <el-button size="mini" @click="TChooseReverse">反选</el-button>
+                                  <el-button size="mini" @click="TChooseAll">Select All</el-button>
+                                  <el-button size="mini" @click="TChooseReverse">Revert</el-button>
                                 </el-button-group>
                               </el-row>
                               <el-row class="checkboxGroup">
@@ -366,7 +366,7 @@
                               </el-row>
                             </el-checkbox-group>
                           </el-form-item>
-                          <el-form-item label="每页数目">
+                          <el-form-item label="Next">
                             
                             <el-radio-group v-model="eachPageTable">
                               <el-row class="checkboxGroup2">
@@ -381,19 +381,19 @@
                           v-model="Torder"
                           active-value="ASC"
                           inactive-value="DESC"
-                          active-text="时间倒序"
-                          inactive-text="时间正序">
+                          active-text="Time (Reverse)"
+                          inactive-text="time">
                         </el-switch>
                         </el-form>  
                         <span slot="footer" class="dialog-footer">
-                          <el-button @click="concelTableFilter" size="small">取消</el-button>
-                          <el-button @click="postTableFilter" size="small">设置</el-button>
+                          <el-button @click="concelTableFilter" size="small">Cancel</el-button>
+                          <el-button @click="postTableFilter" size="small">Confirm</el-button>
                         </span>
                     </el-dialog>
                     <!-- 表数据 -->
                     <el-row class="surperTSearchRow">
 
-                      <el-col :span="3" class="dataPackerLabel">时间范围: </el-col>
+                      <el-col :span="3" class="dataPackerLabel">Time Limit: </el-col>
                       <el-col :span="13">
                         <div class="datePickerWrapper">
                           <el-date-picker
@@ -403,9 +403,9 @@
                             v-model="tableFilter.dateRange"
                             value-format="yyyy-MM-dd HH:mm:ss"
                             type="datetimerange"
-                            range-separator="至"
-                            start-placeholder="开始日期"
-                            end-placeholder="结束日期"
+                            range-separator="To"
+                            start-placeholder="Start"
+                            end-placeholder="End"
                             align="right">
                           </el-date-picker>
                         </div>
@@ -419,7 +419,7 @@
                         </el-input>
                       </el-col> -->
                       <el-col :span="4" class="freshDataBtn">
-                        <el-button @click="openTableFilterD" size="small" style="width: 100%" icon="el-icon-setting">筛选条件</el-button>
+                        <el-button @click="openTableFilterD" size="small" style="width: 100%" icon="el-icon-setting">filter</el-button>
                       </el-col>
                       <el-col :span="4" class="freshDataBtn">
                         <el-button @click="selectTData(false, false)" size="small" style="width: 100%" icon="el-icon-refresh">数据刷新</el-button>
@@ -460,9 +460,9 @@
                 </el-main>
               </el-container>
             </el-tab-pane>
-            <el-tab-pane label="控制台" name="3">
+            <el-tab-pane label="Console" name="3">
               <div class="consoleWrapper">
-                <el-input placeholder="请输入内容" v-model="consoleInput">
+                <el-input placeholder="Please input content" v-model="consoleInput">
                   <template slot="prepend">SQL:</template>
                   <el-button slot="append" icon="el-icon-s-promotion" @click="sendSQL"></el-button>
                 </el-input>
@@ -472,7 +472,7 @@
                 </div>
               </div>
             </el-tab-pane>
-            <el-tab-pane label="当前数据库属性" name="4"><p v-html='dbInfo'></p></el-tab-pane>
+            <el-tab-pane label="Current database properties" name="4"><p v-html='dbInfo'></p></el-tab-pane>
           </el-tabs>
           
         </el-container>
@@ -480,19 +480,19 @@
           
            <el-button class="switchBtn" @click="drawer = true" type="text" size="small">
              <img class="icon" src="./img/switch.png" />
-            切换</el-button>
+            Toggle</el-button>
             <div class="footTextWrapper">
 
             </div>
-            <div class="footText">当前连接:</div> 
+            <div class="footText">Current connection:</div> 
             <div class="footText greyText">{{theLink.name}}</div> 
-            <div class="footText">主机:</div> 
+            <div class="footText">Host:</div> 
             <div class="footText greyText">{{theLink.host}}</div> 
-            <div class="footText">端口:</div> 
+            <div class="footText">Port:</div> 
             <div class="footText greyText">{{theLink.port}}</div> 
-            <div class="footText">用户名:</div> 
+            <div class="footText">User:</div> 
             <div class="footText greyText">{{theLink.user}}</div> 
-            <div class="footText">数据库:</div> 
+            <div class="footText">Database:</div> 
             <div class="footText greyText">{{theDB}}</div> 
         </el-footer>
       </el-container>

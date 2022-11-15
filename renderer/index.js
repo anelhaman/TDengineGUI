@@ -118,7 +118,7 @@ new Vue({
           this.drawer = false
         } else {
           this.$message({
-            message: '请选择数据库',
+            message: 'Please select a database',
             type: 'warning',
             duration:1000
           });
@@ -174,9 +174,9 @@ new Vue({
               })
              
             } else {
-              //连接失败
+              //Connection failed
               this.$message({
-                message: '连接失败',
+                message: 'Connection failed',
                 type: 'error',
                 duration:1000
               });
@@ -187,19 +187,19 @@ new Vue({
        
       },
       deleteLink(key, linkName){
-        this.$confirm('确认删除连接' + linkName + "吗？")
+        this.$confirm('Confirm delete connection' + linkName + "吗？")
         .then(_ => {
           storage.deleteALink(key)
           this.links = storage.getLinks()
           this.$message({
-            message: '删除成功',
+            message: 'Deleted Successfully',
             type: 'success',
             duration:500
           });
         })
         .catch(_ => {
           this.$message({
-            message: '操作已取消',
+            message: 'Operation Cancelled',
             type: 'warning',
             duration:500
           });
@@ -218,7 +218,7 @@ new Vue({
           this.loadingLinks = false
           if(data.res){
             this.$message({
-              message: '刷新成功',
+              message: 'Refresh Successfully',
               type: 'success',
               duration:1000
             });
@@ -226,7 +226,7 @@ new Vue({
             //TODO展开菜单
 
           } else {
-            //连接失败，1.提示 2.删除当前连接 3.重新连接
+            //Connection failed，1.提示 2.删除当前连接 3.重新连接
             //1
             this.$message({
               message: data.msg,
@@ -238,7 +238,7 @@ new Vue({
             this.links = storage.getLinks()
             //3
             this.$message({
-              message: '尝试重新连接',
+              message: 'Try to reconnect',
               type: 'warning',
               duration:1000
             });
@@ -289,7 +289,7 @@ new Vue({
             if(data.res){
               //新增成功
               this.$message({
-                message: '添加成功',
+                message: 'Added Successfully',
                 type: 'success',
                 duration:1000
               });
@@ -306,14 +306,14 @@ new Vue({
           })
         } else{
           this.$message({
-            message: '请填写内容',
+            message: 'Please fill in the data',
             type: 'warning',
             duration:1000
           });
         }
       },
       deleteDB(link, dbName, key){
-        this.$confirm('确认删除数据库' + dbName + "吗？")
+        this.$confirm('Confirm database deletion ' + dbName + "吗？")
         .then(_ => {
           let payload = {
             ip:link.host,
@@ -328,7 +328,7 @@ new Vue({
             if(data.res){
               //成功
               this.$message({
-                message: '删除成功',
+                message: 'Deleted Successfully',
                 type: 'success',
                 duration:1000
               });
@@ -345,7 +345,7 @@ new Vue({
         })
         .catch(_ => {
           this.$message({
-            message: '操作已取消',
+            message: 'Operation cancelled',
             type: 'warning',
             duration:1000
           });
@@ -353,12 +353,12 @@ new Vue({
       },
       makeDbInfo(dbs,dbName){
         console.log(dbs)
-        let info = '无法获取数据库信息'
+        let info = 'Could not get database information'
         dbs.forEach(item => {
           if(item['name'] == dbName){
-            info = `数据库名:&nbsp;&nbsp;${dbName}<br/>`
-            info += `创建时间:&nbsp;&nbsp;${item['created_time']}<br/>`
-            info += `可更新:&nbsp;&nbsp;${item['update'] == 0?'否':'是'}<br/>`
+            info = `Database Name:&nbsp;&nbsp;${dbName}<br/>`
+            info += `Created Time:&nbsp;&nbsp;${item['created_time']}<br/>`
+            info += `Update table:&nbsp;&nbsp;${item['update'] == 0?'否':'是'}<br/>`
             info += `cache(MB):&nbsp;&nbsp;${item['cache(MB)']}<br/>`
             info += `cachelast:&nbsp;&nbsp;${item['cachelast']}<br/>`
             info += `comp:&nbsp;&nbsp;${item['comp']}<br/>`
@@ -513,7 +513,7 @@ new Vue({
           if(data.res){
             //拉取超级表成功
             this.$message({
-              message: '刷新成功',
+              message: 'Refresh Successfully',
               type: 'success',
               duration:1000
             });
@@ -545,7 +545,7 @@ new Vue({
           if(data.res){
             //拉取表成功
             this.$message({
-              message: '刷新成功',
+              message: 'Refresh Successfully',
               type: 'success',
               duration:1000
             });
@@ -693,7 +693,7 @@ new Vue({
             if(data.data.length != 0){
               //有数据
               this.$message({
-                message: '获取成功',
+                message: 'Refresh',
                 type: 'success',
                 duration:1000
               });
@@ -709,7 +709,7 @@ new Vue({
               this.surperTableData = data.data
               this.totalSurperTable = data.count
               this.$message({
-                message: '无数据',
+                message: 'No data',
                 type: 'warning',
                 duration:1000
               });
@@ -761,7 +761,7 @@ new Vue({
             if(data.data.length != 0){
               //有数据
               this.$message({
-                message: '获取成功',
+                message: 'Refresh',
                 type: 'success',
                 duration:1000
               });
@@ -777,7 +777,7 @@ new Vue({
               this.tableData = data.data
               this.totalTable = data.count
               this.$message({
-                message: '无数据',
+                message: 'No data',
                 type: 'warning',
                 duration:1000
               });
@@ -829,7 +829,7 @@ new Vue({
             if(data.res){
               //成功
               this.$message({
-                message: '删除成功',
+                message: 'Deleted Successfully',
                 type: 'success',
                 duration:500
               });
@@ -847,7 +847,7 @@ new Vue({
         })
         .catch(_ => {
           this.$message({
-            message: '操作已取消',
+            message: 'Operation Cancelled',
             type: 'warning',
             duration:500
           });
@@ -873,7 +873,7 @@ new Vue({
             if(data.res){
               //成功
               this.$message({
-                message: '删除成功',
+                message: 'Deleted Successfully',
                 type: 'success',
                 duration:500
               });
@@ -891,7 +891,7 @@ new Vue({
         })
         .catch(_ => {
           this.$message({
-            message: '操作已取消',
+            message: 'Operation Cancelled',
             type: 'warning',
             duration:500
           });
